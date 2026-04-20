@@ -6,7 +6,6 @@ from app import models
 
 router = APIRouter()
 
-# Get all assignments with volunteer details
 
 @router.get("/assignments")
 def get_assignments(db: Session = Depends(get_db)):

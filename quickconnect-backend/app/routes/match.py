@@ -7,16 +7,17 @@ from app.services.match_service import match_volunteers_logic
 
 router = APIRouter()
 
+
 @router.post("/match/{need_id}")
 def match_volunteers(need_id: int, db: Session = Depends(get_db)):
 
-    # 1. Check if already assigned
     existing = db.query(models.Assignment).filter(
-        models.Assignment.need_id == need_id
+        models.Assignment.need_id == need_id,
+        models.Assignment.status.in_(["pending", "accepted"])
     ).first()
 
     if existing:
-        return {"message": "Need already assigned"}
+        return {"message": "Volunteers already notified or assigned"}
 
     # 2. Get need
     need = db.query(models.Need).filter(
@@ -34,7 +35,7 @@ def match_volunteers(need_id: int, db: Session = Depends(get_db)):
     if not volunteers:
         return {"error": "No volunteers available"}
 
-    # Call service
+    # 4. Matching logic
     scored_list = match_volunteers_logic(need, volunteers)
 
     if not scored_list:
@@ -50,7 +51,7 @@ def match_volunteers(need_id: int, db: Session = Depends(get_db)):
         assignment = models.Assignment(
             need_id=need.id,
             volunteer_id=v.id,
-            status="assigned"
+            status="pending"
         )
         db.add(assignment)
 
@@ -64,12 +65,77 @@ def match_volunteers(need_id: int, db: Session = Depends(get_db)):
             "longitude": v.longitude
         })
 
-    # Update need
-    need.status = "assigned"
+    need.status = "notified"
 
     db.commit()
 
     return {
-        "message": "Top volunteers assigned",
+        "message": "Top volunteers notified",
         "assigned": assigned_list
     }
+
+
+
+@router.post("/accept/{assignment_id}")
+def accept_assignment(assignment_id: int, db: Session = Depends(get_db)):
+
+    # 1. Get assignment
+    assignment = db.query(models.Assignment).filter(
+        models.Assignment.id == assignment_id
+    ).first()
+
+    if not assignment:
+        return {"error": "Assignment not found"}
+
+    # 2. Check if already taken
+    already_accepted = db.query(models.Assignment).filter(
+        models.Assignment.need_id == assignment.need_id,
+        models.Assignment.status == "accepted"
+    ).first()
+
+    if already_accepted:
+        return {"message": "Task already taken by another volunteer"}
+
+    # 3. Accept this assignment
+    assignment.status = "accepted"
+
+    # 4. Mark volunteer as busy
+    volunteer = db.query(models.Volunteer).filter(
+        models.Volunteer.id == assignment.volunteer_id
+    ).first()
+
+    if volunteer:
+        volunteer.availability = "busy"
+
+    # 5. Reject others
+    db.query(models.Assignment).filter(
+        models.Assignment.need_id == assignment.need_id,
+        models.Assignment.id != assignment.id
+    ).update({"status": "rejected"})
+
+    # 6. Update need
+    need = db.query(models.Need).filter(
+        models.Need.id == assignment.need_id
+    ).first()
+
+    if need:
+        need.status = "assigned"
+
+    db.commit()
+
+    return {
+        "message": "Volunteer accepted and assigned",
+        "volunteer_id": assignment.volunteer_id
+    }
+
+
+
+@router.get("/pending/{need_id}")
+def get_pending(need_id: int, db: Session = Depends(get_db)):
+
+    data = db.query(models.Assignment).filter(
+        models.Assignment.need_id == need_id,
+        models.Assignment.status == "pending"
+    ).all()
+
+    return {"data": data}

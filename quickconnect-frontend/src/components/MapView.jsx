@@ -40,14 +40,20 @@ const getIcon = (urgency) => {
 };
 
 const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
-  
-  // ✅ Safe center fallback
+
+  // ✅ FILTER ONLY ACCEPTED HERE (FIX)
+  const acceptedAssignments = assigned.filter(
+    (a) => a.status === "accepted"
+  );
+
+
+  // ✅ Safe center
   const validNeeds = needs.filter(n => n.latitude && n.longitude);
 
   const center =
     validNeeds.length > 0
       ? [validNeeds[0].latitude, validNeeds[0].longitude]
-      : [13.0827, 80.2707]; // Chennai fallback
+      : [13.0827, 80.2707];
 
   return (
     <div style={{ position: "relative" }}>
@@ -84,39 +90,31 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
               icon={blueIcon}
             >
               <Popup>
-                <b>{v.name}</b>
+                <b>Volunteer: {v.name}</b>
               </Popup>
             </Marker>
           ))}
 
         {/* ⭐ Assigned Volunteers */}
-        {assigned
-          .filter(a => a.latitude && a.longitude)
-          .map((a) => (
-            <Marker
-              key={`assigned-${a.volunteer_id}`}
-              position={[a.latitude, a.longitude]}
-              icon={starIcon}
-            >
-              <Popup>
-                ⭐ <b>{a.name}</b> <br />
-                Score: {a.score} <br />
-                Distance: {a.distance_km ?? "N/A"} km
-              </Popup>
-            </Marker>
-          ))}
+        {acceptedAssignments.map((a) => (
+          <Marker
+            key={`assigned-${a.volunteer_id}`}
+            position={[a.latitude, a.longitude]}
+            icon={starIcon}
+          >
+            <Popup>
+              ⭐ <b>{a.name}</b> <br />
+              Score: {a.score} <br />
+              Distance: {a.distance_km} km
+            </Popup>
+          </Marker>
+        ))}
 
         {/* 🔗 Connection lines */}
-        {assigned.map((a) => {
+        {acceptedAssignments.map((a) => {
           const need = needs.find((n) => n.id === a.need_id);
 
-          if (
-            !need ||
-            !need.latitude ||
-            !need.longitude ||
-            !a.latitude ||
-            !a.longitude
-          ) return null;
+          if (!need || !need.latitude || !need.longitude) return null;
 
           return (
             <Polyline
@@ -140,7 +138,8 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
           background: "white",
           padding: "10px",
           borderRadius: "8px",
-          boxShadow: "0 0 10px rgba(0,0,0,0.2)"
+          boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+          zIndex: 1000
         }}
       >
         <b>Legend</b> <br />
