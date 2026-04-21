@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MapView from "./components/MapView";
+import MapView from "./components/MapView/MapView.jsx";
 
 const App = () => {
   const [needs, setNeeds] = useState([]);
