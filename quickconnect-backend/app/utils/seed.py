@@ -61,6 +61,15 @@ def seed_data(db: Session):
             availability="available",
             latitude=12.9532,
             longitude=80.1416
+        ),
+        models.Volunteer(
+            name="Kavin",
+            email="kavin@qc.com",
+            phone="1234567390",
+            skills="logistics, first aid",
+            availability="available",
+            latitude=12.9832,
+            longitude=80.2416
         )
     ]
 
