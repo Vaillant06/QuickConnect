@@ -1,4 +1,4 @@
-const BASE = "https://quickconnect-zc28.onrender.com";
+const BASE = import.meta.env.VITE_API_URL;
 
 export const getHeaders = () => ({
   "Content-Type": "application/json",

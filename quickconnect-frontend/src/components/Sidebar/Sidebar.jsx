@@ -7,11 +7,11 @@ import "./Sidebar.css";
 
 const Sidebar = ({ needs, volunteers, assigned, refresh }) => {
   const navigate = useNavigate();
-  
+
   const clearAssignments = async () => {
     if (!window.confirm("Clear all assignments?")) return;
 
-    await fetch("https://quickconnect-zc28.onrender.com/assignments", {
+    await fetch(`${import.meta.env.VITE_API_URL}/assignments`, {
       method: "DELETE",
     });
 
