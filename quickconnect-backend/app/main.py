@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from app.routes import needs, volunteers, match, assignments
 from app.utils.seed import seed_data
-from app.database import SessionLocal
+from app.database import SessionLocal, Base, engine
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
