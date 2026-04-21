@@ -40,3 +40,5 @@ class Assignment(Base):
     volunteer_id = Column(Integer, ForeignKey("volunteers.id"))
     status = Column(String, default="pending")
     assigned_at = Column(TIMESTAMP, server_default=func.now())
+    score = Column(Integer, nullable=True)
+    distance = Column(Float, nullable=True)

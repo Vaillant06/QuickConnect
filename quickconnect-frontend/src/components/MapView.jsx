@@ -5,31 +5,31 @@ import "leaflet/dist/leaflet.css";
 // 🔴 High
 const redIcon = new L.Icon({
   iconUrl: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
-  iconSize: [25, 41],
+  iconSize: [35, 40],
 });
 
 // 🟡 Medium
 const yellowIcon = new L.Icon({
   iconUrl: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
-  iconSize: [25, 41],
+  iconSize: [35, 40],
 });
 
 // 🟢 Low
 const greenIcon = new L.Icon({
   iconUrl: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
-  iconSize: [25, 41],
+  iconSize: [35, 40],
 });
 
 // 🔵 Volunteer
 const blueIcon = new L.Icon({
   iconUrl: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-  iconSize: [25, 41],
+  iconSize: [35, 40],
 });
 
 // ⭐ Assigned
 const starIcon = new L.Icon({
   iconUrl: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png",
-  iconSize: [25, 41],
+  iconSize: [35, 40],
 });
 
 // 🎯 urgency → icon
@@ -42,18 +42,22 @@ const getIcon = (urgency) => {
 const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
 
   // ✅ FILTER ONLY ACCEPTED HERE (FIX)
-  const acceptedAssignments = assigned.filter(
-    (a) => a.status === "accepted"
+  const acceptedAssignments = assigned.filter((a) =>
+    a.status === "accepted" &&
+    a.latitude &&
+    a.longitude
   );
 
 
   // ✅ Safe center
   const validNeeds = needs.filter(n => n.latitude && n.longitude);
+  const acceptedIds = acceptedAssignments.map(a => a.volunteer_id);
 
   const center =
     validNeeds.length > 0
       ? [validNeeds[0].latitude, validNeeds[0].longitude]
       : [13.0827, 80.2707];
+
 
   return (
     <div style={{ position: "relative" }}>
@@ -82,7 +86,7 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
 
         {/* 🔵 Volunteers */}
         {volunteers
-          .filter(v => v.latitude && v.longitude)
+          .filter(v => v.latitude && v.longitude && !acceptedIds.includes(v.id))
           .map((v) => (
             <Marker
               key={`vol-${v.id}`}

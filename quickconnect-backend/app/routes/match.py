@@ -51,7 +51,9 @@ def match_volunteers(need_id: int, db: Session = Depends(get_db)):
         assignment = models.Assignment(
             need_id=need.id,
             volunteer_id=v.id,
-            status="pending"
+            status="pending",
+            score=item["score"],
+            distance=item["distance"]
         )
         db.add(assignment)
 
