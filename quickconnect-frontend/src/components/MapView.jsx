@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "./MapView.css";
 
 // 🔴 High
 const redIcon = new L.Icon({
@@ -150,12 +151,21 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
           zIndex: 1000
         }}
       >
-        <b>Legend</b> <br />
-        🔴 High Need <br />
-        🟡 Medium Need <br />
-        🟢 Low Need <br />
-        🔵 Volunteer <br />
-        ⭐ Assigned
+        <p style={{ alignItems: "center", justifyItems: "center", marginBottom: "10px" }}><b>Legend</b></p> <br />
+        <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" alt="high" />
+        <p>High</p>
+        <br />
+        <img src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" alt="medium" />
+        <p>Medium</p>
+        <br />
+        <img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" alt="low" />
+        <p>Low</p>
+        <br />
+        <img src="icons/volunteer.png" alt="accepted" />
+        <p>Volunteer</p>
+        <br />  
+        <img src="icons/accepted.png" alt="accepted" />
+        <p>Assigned</p>
       </div>
     </div>
   );

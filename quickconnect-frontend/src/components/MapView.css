@@ -1,0 +1,14 @@
+
+
+img {
+    width: 25px;
+    height: 25px;
+}
+
+p {
+    display: inline-block;
+    display: inline;
+    position: relative;
+    top: -8px;
+    margin-left: 5px;
+}
