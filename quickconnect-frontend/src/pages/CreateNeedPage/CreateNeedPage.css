@@ -1,0 +1,96 @@
+.create-page {
+  min-height: 100vh;
+  background: #f4f6f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  width: 420px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* inputs */
+.form-container input,
+.form-container textarea,
+.form-container select {
+  width: 95%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* textarea */
+.form-container textarea {
+  height: 70px;
+  resize: none;
+  width: 95%;
+}
+
+/* button */
+.create-btn {
+  width: 100%;
+  padding: 10px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.create-btn:hover {
+  background: #218838;
+}
+
+
+.location-btn {
+  width: 100%;
+    padding: 10px;
+    font-size: 12px;
+    background: #0d5de7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.location-btn:hover {
+    background: #0b53c4;
+}
+/* optional back button */
+.back-btn {
+  margin-bottom: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.demo-data {
+  margin-top: 20px;
+  font-size: 12px;
+  color: gray;
+  text-align: center;
+}

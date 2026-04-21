@@ -97,3 +97,36 @@ def delete_assignments_by_need(need_id: int, db: Session = Depends(get_db)):
         "message": "All assignments deleted for this need and volunteers are freed",
         "data": assignments
     }
+
+
+@router.delete("/assignments")
+def delete_all_assignments(db: Session = Depends(get_db)):
+
+    assignments = db.query(models.Assignment).all()
+
+    if not assignments:
+        return {"message": "No assignments found"}
+
+    volunteer_ids = [a.volunteer_id for a in assignments]
+
+    volunteers = db.query(models.Volunteer).filter(
+        models.Volunteer.id.in_(volunteer_ids)
+    ).all()
+
+    for v in volunteers:
+        v.availability = "available"
+
+    need_ids = [a.need_id for a in assignments]
+
+    needs = db.query(models.Need).filter(
+        models.Need.id.in_(need_ids)
+    ).all()
+
+    for n in needs:
+        n.status = "pending"
+
+    db.query(models.Assignment).delete()
+
+    db.commit()
+
+    return {"message": "All assignments cleared"}

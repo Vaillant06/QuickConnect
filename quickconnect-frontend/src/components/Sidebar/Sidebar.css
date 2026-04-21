@@ -29,14 +29,12 @@
     color: white   
 }
 
-/* Each section */
 .section {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
 }
 
-/* Section titles */
 .section h2 {
   font-size: 18px;
   margin: 4px 0;
@@ -44,11 +42,49 @@
   font-weight: 600;
 }
 
-/* Scroll area (shows ~2 items) */
 .section-list {
-  max-height: 180px;   /* 🔥 controls visible cards */
+  max-height: 200px;
   overflow-y: auto;
   padding-right: 4px;
+}
+
+.demo-buttons button {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    width: 150px;
+    justify-content: center;
+}
+
+.add-need-btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-need-btn:hover {
+  background: #218838;
+}
+
+.clear-btn {
+  padding: 7px 17px;
+  font-size: 12px;
+  border: none;
+  border-radius: 5px;
+  background: #dc3545;
+  color: white;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  background: #b02a37;
 }
 
 /* Smooth scrollbar */
