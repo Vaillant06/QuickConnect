@@ -51,6 +51,9 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
   const validNeeds = needs.filter(n => n.latitude && n.longitude);
   const acceptedIds = acceptedAssignments.map(a => a.volunteer_id);
 
+  console.log("Assignments:", acceptedAssignments);
+  console.log("Needs:", needs);
+
   const center =
     validNeeds.length > 0
       ? [validNeeds[0].latitude, validNeeds[0].longitude]
