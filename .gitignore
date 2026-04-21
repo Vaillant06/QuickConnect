@@ -60,3 +60,8 @@ coverage/
 # Mac / Linux temp files
 *.swp
 *.swo
+
+
+# Text Files/ pdfs
+*.txt
+*.pdf

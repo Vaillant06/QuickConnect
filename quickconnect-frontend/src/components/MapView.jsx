@@ -28,7 +28,7 @@ const blueIcon = new L.Icon({
 
 // ⭐ Assigned
 const starIcon = new L.Icon({
-  iconUrl: "icons/accepted.webp",
+  iconUrl: "icons/accepted.png",
   iconSize: [40, 40],
 });
 

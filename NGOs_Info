@@ -1,0 +1,57 @@
+Non-Governmental Organizations
+
+Three Types:
+1. Society
+2. Trust
+3. Section 8 Company
+
+
+Structure:
+1. Board of directors
+2. Executive team
+3. Program Managers
+4. Staff and Volunteers
+
+
+Funding:
+1. Individuals
+2. corporate partnerships
+3. foundations and grantmakers
+4. Social Enterprises
+
+Community engagement
+Advocacy and policy influence
+Monitoring and Evaluation
+Collaborations and Partnerships
+Disaster response / Humanitarian aid
+
+
+## Scoring Logic:
+
+Score = (Availability * 50) + (Skill Match * 30)  + (Distance Score * 20)
+
+
+
+## System Workflow:
+
+[NGO Data] → [Database] → [Analysis + Priority]
+                                ↓
+                    [Matching Engine]
+                                ↓
+[Volunteers] → [Assignment] → [Execution → Feedback]
+
+
+
+## Priority matching flow:
+
+[Need Created]
+      ↓
+[System Auto Matches Volunteers]
+      ↓
+[Top Matches Selected]
+      ↓
+[Admin Dashboard (optional override)]
+      ↓
+[Assignment Confirmed]
+      ↓
+[Volunteer Notified]
