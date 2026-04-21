@@ -1,0 +1,71 @@
+.assign-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  overflow: hidden;
+}
+
+/* Header */
+.assign-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.assign-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Status badge */
+.assign-status {
+  padding: 7px 17px;
+  font-size: 11px;
+  width: 60px;
+  text-align: center;
+  border-radius: 6px;
+  color: white;
+}
+
+.assign-status.pending {
+  background: #fb8c00;
+}
+
+.assign-status.accepted {
+  background: #43a047;
+}
+
+.assign-status.rejected {
+  background: #757575;
+}
+
+/* Info row */
+.assign-info {
+  font-size: 12px;
+  color: #555;
+  display: flex;
+  gap: 10px;
+}
+
+/* Accept button */
+.accept-btn {
+  align-self: flex-end;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.accept-btn:hover {
+  background: #1b5e20;
+}

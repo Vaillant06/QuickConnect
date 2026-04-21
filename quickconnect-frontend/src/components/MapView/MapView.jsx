@@ -58,11 +58,11 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
 
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className="map-container" style={{ position: "relative" }}>
       <MapContainer
+        className="map-view"
         center={center}
         zoom={12}
-        style={{ height: "500px", width: "100%" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
@@ -153,13 +153,13 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
       >
         <p style={{ alignItems: "center", justifyItems: "center", marginBottom: "10px" }}><b>Legend</b></p> <br />
         <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" alt="high" />
-        <p>High</p>
+        <p>High Urgency</p>
         <br />
         <img src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" alt="medium" />
-        <p>Medium</p>
+        <p>Medium Urgency</p>
         <br />
         <img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" alt="low" />
-        <p>Low</p>
+        <p>Low Urgency</p>
         <br />
         <img src="icons/volunteer.png" alt="accepted" />
         <p>Volunteer</p>

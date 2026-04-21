@@ -10,3 +10,8 @@ p {
     top: -8px;
     margin-left: 5px;
 }
+
+.map-view {
+     height: 800px;
+     width: 100%;
+}

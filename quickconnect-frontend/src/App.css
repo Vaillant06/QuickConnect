@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+
+.map {
+  width: 65%;
+}
+
+
+
+.badge.high { background: red; }
+.badge.medium { background: orange; }
+.badge.low { background: green; }

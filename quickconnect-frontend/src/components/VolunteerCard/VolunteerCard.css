@@ -1,0 +1,37 @@
+.vol-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vol-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status {
+  padding: 7px 17px;
+  font-size: 11px;
+  border-radius: 6px;
+  color: white;
+  width: 60px;
+  text-align: center;
+}
+
+.status.available {
+  background: #43a047; 
+}
+
+.status.busy {
+  background: #e53935;
+}
+
+.status.pending {
+  background: #fb8c00; 
+}
