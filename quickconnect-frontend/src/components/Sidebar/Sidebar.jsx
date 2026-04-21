@@ -11,7 +11,7 @@ const Sidebar = ({ needs, volunteers, assigned, refresh }) => {
   const clearAssignments = async () => {
     if (!window.confirm("Clear all assignments?")) return;
 
-    await fetch("http://127.0.0.1:8000/assignments", {
+    await fetch("https://quickconnect-zc28.onrender.com/assignments", {
       method: "DELETE",
     });
 
