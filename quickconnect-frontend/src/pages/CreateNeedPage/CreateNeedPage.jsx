@@ -51,12 +51,12 @@ const CreateNeedPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (loading) return; // 🛑 prevent double click
+    if (loading) return;
 
     setLoading(true);
 
     try {
-      await fetch("http://127.0.0.1:8000/needs", {
+      await fetch(`${import.meta.env.VITE_API_URL}/needs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
