@@ -92,21 +92,24 @@ const CreateNeedPage = () => {
           <input
             name="latitude"
             value={form.latitude || ""}
+            placeholder="latitude"
             readOnly
           />
 
           <input
             name="longitude"
             value={form.longitude || ""}
+            placeholder="longitude"
             readOnly
           />
           <button type="button" className="location-btn" onClick={getLocation}>
             📍 Use My Location
           </button>
 
-          <button type="submit" disabled={loading}>
+          <button type="submit" className="create-btn" disabled={loading}>
             {loading ? "Creating..." : "Create Need"}
-          </button>        </form>
+          </button>        
+        </form>
 
         <div className="demo-data">
           <p>This is for demo purpose.</p><br />
