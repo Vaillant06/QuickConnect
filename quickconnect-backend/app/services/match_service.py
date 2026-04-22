@@ -10,11 +10,6 @@ def match_volunteers_logic(need, volunteers):
         if v.availability == "available":
             score += 50
 
-        if need.category and v.skills:
-            skills_list = [s.strip() for s in v.skills.lower().split(",")]
-            if need.category.lower() in skills_list:
-                score += 30
-
         if need.latitude and v.latitude:
             distance = calculate_distance(
                 need.latitude, need.longitude,
@@ -27,6 +22,11 @@ def match_volunteers_logic(need, volunteers):
                 score += 10
             else:
                 score += 5
+
+        if need.category and v.skills:
+            skills_list = [s.strip() for s in v.skills.lower().split(",")]
+            if need.category.lower() in skills_list:
+                score += 30
 
         if score > 0:
             scored_volunteers[v.id] = {

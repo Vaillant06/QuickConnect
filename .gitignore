@@ -60,3 +60,5 @@ coverage/
 # Mac / Linux temp files
 *.swp
 *.swo
+.vercel
+.env*.local
