@@ -101,7 +101,7 @@ uvicorn main:app --reload
 ```bash
 cd quickconnect-frontend
 npm install
-npm start
+npm run dev
 ```
 
 ---
