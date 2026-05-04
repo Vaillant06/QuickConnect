@@ -1,6 +1,6 @@
 from app import models
 from sqlalchemy.orm import Session
-
+import bcrypt
 
 def seed_data(db: Session):
 
@@ -41,7 +41,7 @@ def seed_data(db: Session):
             phone="1234567890",
             skills="food, logistics",
             availability="available",
-            password_hash="ravi@qc123",
+            password_hash=bcrypt.hashpw("ravi@qc123".encode("utf-8"), bcrypt.gensalt()).decode("utf-8"),
             latitude=12.9700,
             longitude=80.2100
         ),
@@ -51,7 +51,7 @@ def seed_data(db: Session):
             email="priya@qc.com",
             phone="1234567891",
             availability="available",
-            password_hash="priya@qc123",
+            password_hash=bcrypt.hashpw("priya@qc123".encode("utf-8"), bcrypt.gensalt()).decode("utf-8"),
             latitude=13.0827,
             longitude=80.2707
         ),
@@ -61,7 +61,8 @@ def seed_data(db: Session):
             phone="1234567890",
             skills="rescue, food",
             availability="available",
-            password_hash="arun@qc123",
+            password_hash=bcrypt.hashpw("arun@qc123".encode("utf-8"), bcrypt.gensalt()).decode("utf-8"),
+
             latitude=12.9532,
             longitude=80.1416
         ),
@@ -71,7 +72,7 @@ def seed_data(db: Session):
             phone="1234567390",
             skills="logistics, first aid",
             availability="available",
-            password_hash="kavin@qc123",
+            password_hash=bcrypt.hashpw("kavin@qc123".encode("utf-8"), bcrypt.gensalt()).decode("utf-8"),
             latitude=12.9832,
             longitude=80.2416
         )
