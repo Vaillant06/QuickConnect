@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+import bcrypt
 
 from app.database import get_db
 from app import models, schemas
@@ -10,6 +11,8 @@ router = APIRouter()
 @router.post("/")
 def create_volunteer(volunteer: schemas.VolunteerCreate, db: Session = Depends(get_db)):
 
+    password_hash = bcrypt.hashpw(volunteer.password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+
     new_volunteer = models.Volunteer(
         name=volunteer.name,
         email=volunteer.email,
@@ -18,6 +21,7 @@ def create_volunteer(volunteer: schemas.VolunteerCreate, db: Session = Depends(g
         availability=volunteer.availability,
         latitude=volunteer.latitude,
         longitude=volunteer.longitude,
+        password_hash=password_hash,
     )
 
     db.add(new_volunteer)

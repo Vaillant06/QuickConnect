@@ -41,6 +41,7 @@ def seed_data(db: Session):
             phone="1234567890",
             skills="food, logistics",
             availability="available",
+            password="ravi@qc123",
             latitude=12.9700,
             longitude=80.2100
         ),
@@ -50,6 +51,7 @@ def seed_data(db: Session):
             email="priya@qc.com",
             phone="1234567891",
             availability="available",
+            password="priya@qc123",
             latitude=13.0827,
             longitude=80.2707
         ),
@@ -59,6 +61,7 @@ def seed_data(db: Session):
             phone="1234567890",
             skills="rescue, food",
             availability="available",
+            password="arun@qc123",
             latitude=12.9532,
             longitude=80.1416
         ),
@@ -68,6 +71,7 @@ def seed_data(db: Session):
             phone="1234567390",
             skills="logistics, first aid",
             availability="available",
+            password="kavin@qc123",
             latitude=12.9832,
             longitude=80.2416
         )

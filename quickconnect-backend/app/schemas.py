@@ -18,3 +18,8 @@ class VolunteerCreate(BaseModel):
     availability: str
     latitude: float
     longitude: float
+    password: str
+
+class VolunteerLogin(BaseModel):
+    email: str
+    password: str

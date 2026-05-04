@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import CreateNeedPage from "./pages/CreateNeedPage/CreateNeedPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
 
 import "./App.css";
 
@@ -9,6 +10,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Dashboard />} />
       <Route path="/create-need" element={<CreateNeedPage />} />
+      <Route path="/login" element={<LoginPage />} />
     </Routes>
   </Router>;
 }

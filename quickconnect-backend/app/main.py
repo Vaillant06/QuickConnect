@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import needs, volunteers, match, assignments
+from app.routes import needs, volunteers, match, assignments, login
 from app.utils.seed import seed_data
 from app.database import SessionLocal, Base, engine
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,6 +23,7 @@ app.include_router(needs.router, prefix="/needs")
 app.include_router(volunteers.router, prefix="/volunteers")
 app.include_router(match.router)
 app.include_router(assignments.router)
+app.include_router(login.router, prefix="/auth")
 
 @app.on_event("startup")
 def on_startup():
