@@ -41,7 +41,7 @@ def seed_data(db: Session):
             phone="1234567890",
             skills="food, logistics",
             availability="available",
-            password="ravi@qc123",
+            password_hash="ravi@qc123",
             latitude=12.9700,
             longitude=80.2100
         ),
