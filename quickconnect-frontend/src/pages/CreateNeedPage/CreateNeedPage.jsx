@@ -81,8 +81,7 @@ const CreateNeedPage = () => {
   return (
     <div className="create-page">
       <div className="form-container">
-        <p className="back-btn" onClick={() => navigate("/")}>⬅ Go Back</p>
-
+        
         <h2> ➕ Add New Need</h2>
 
         <form onSubmit={handleSubmit}>
@@ -111,8 +110,11 @@ const CreateNeedPage = () => {
           </button>        
         </form>
 
+        <div className="footer-section">
+          <p className="back-btn" onClick={() => navigate("/")}>⬅ Go Back</p>
+        </div>
+
         <div className="demo-data">
-          <p>This is for demo purpose.</p><br />
           <p>Click 'Use My Location' button to get the coordinates of the location.</p>
         </div>
       </div>

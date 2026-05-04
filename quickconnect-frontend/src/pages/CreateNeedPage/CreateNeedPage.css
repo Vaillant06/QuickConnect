@@ -88,6 +88,13 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.footer-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
 .demo-data {
   margin-top: 20px;
   font-size: 12px;
