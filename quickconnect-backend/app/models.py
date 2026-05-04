@@ -29,6 +29,7 @@ class Volunteer(Base):
     availability = Column(String)
     latitude = Column(Float)
     longitude = Column(Float)
+    password_hash = Column(String)
     created_at = Column(TIMESTAMP, server_default=func.now())
 
 
