@@ -17,6 +17,9 @@ export const fetchSingleVolunteer = (id) =>
 export const fetchAssignments = () =>
   fetch(`${BASE}/assignments`).then(res => res.json());
 
+export const fetchVolunteerAssignments = (id) =>
+  fetch(`${BASE}/assignments/volunteer/${id}`).then(res => res.json());
+
 export const matchNeed = (id) =>
   fetch(`${BASE}/match/${id}`, { method: "POST" });
 

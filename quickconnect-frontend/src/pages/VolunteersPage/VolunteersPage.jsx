@@ -2,64 +2,101 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 
-import { fetchSingleVolunteer, fetchAssignments, fetchNeeds } from "../../api";
+import {
+    fetchSingleVolunteer,
+    fetchVolunteerAssignments
+} from "../../api";
+
 import MapView from "../../components/MapView/MapView";
 
 export default function VolunteerPage() {
+
     const navigate = useNavigate();
+
     const [volunteer, setVolunteer] = useState(null);
     const [assigned, setAssigned] = useState([]);
-    const [needs, setNeeds] = useState([]);
-
-    const loadData = () => {
-        fetchNeeds().then(d => setNeeds(d.data));
-        fetchAssignments().then(d => setAssigned(d.data));
-      };
 
     useEffect(() => {
-    const token = localStorage.getItem("token");
 
-        if (!token) return;
+        const token = localStorage.getItem("token");
 
-        const decoded = jwtDecode(token);
+        if (!token) {
+            navigate("/login");
+            return;
+        }
 
-        const volunteerId = decoded.sub;
+        try {
 
-        fetchSingleVolunteer(volunteerId)
-            .then(data => setVolunteer(data.data))
-            .catch(err => console.error(err));
+            const decoded = jwtDecode(token);
 
-        loadData();
+            const volunteerId = Number(decoded.sub);
 
-    }, []);
+            fetchSingleVolunteer(volunteerId)
+                .then(data => setVolunteer(data.data))
+                .catch(err => console.error(err));
+
+            fetchVolunteerAssignments(volunteerId)
+                .then(data => setAssigned(data.data))
+                .catch(err => console.error(err));
+
+        } catch (err) {
+
+            console.error("Invalid token", err);
+
+            localStorage.removeItem("token");
+
+            navigate("/login");
+        }
+
+    }, [navigate]);
 
     const logout = () => {
-        localStorage.removeItem("token");
-        navigate("/login")
-    }
 
-    return ( 
-    <>  
-        <div>
-            <h1>Volunteer Page</h1>
-            {volunteer && (
-                <>
-                <div>
-                    <p>Name: {volunteer.name}</p>
-                    <p>Email: {volunteer.email}</p>
-                </div>
-                </>
-            )}
-            <button onClick={logout}>Logout</button>
-        </div>
-        <div className="map">
-            <MapView
-                needs={needs}
-                assigned={assigned}
-                volunteers={volunteer}
-            />
-        </div>
-        
-    </>
-    )
+        localStorage.removeItem("token");
+
+        navigate("/login");
+    };
+
+    return (
+        <>
+            <div>
+                <h1>Volunteer Page</h1>
+
+                {volunteer && (
+                    <div>
+                        <p>Name: {volunteer.name}</p>
+                        <p>Email: {volunteer.email}</p>
+                        <p>Skills: {volunteer.skills}</p>
+                        <p>Availability: {volunteer.availability}</p>
+                    </div>
+                )}
+
+                <button onClick={logout}>
+                    Logout
+                </button>
+            </div>
+
+            <div>
+                <h2>Assignments</h2>
+
+                {assigned.length > 0 ? (
+                    assigned.map((assignment) => (
+                        <div key={assignment.id}>
+                            <p>Need ID: {assignment.need_id}</p>
+                            <p>Status: {assignment.status}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>No assignments found</p>
+                )}
+            </div>
+
+            <div className="map">
+                <MapView
+                    assigned={assigned}
+                    volunteers={volunteer ? [volunteer] : []}
+                />
+            </div>
+        </>
+    );
 }
