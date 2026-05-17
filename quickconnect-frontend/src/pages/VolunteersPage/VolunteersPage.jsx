@@ -2,15 +2,17 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 
-import { fetchSingleVolunteer, fetchAssignments } from "../../api";
+import { fetchSingleVolunteer, fetchAssignments, fetchNeeds } from "../../api";
 import MapView from "../../components/MapView/MapView";
 
 export default function VolunteerPage() {
     const navigate = useNavigate();
     const [volunteer, setVolunteer] = useState(null);
     const [assigned, setAssigned] = useState([]);
+    const [needs, setNeeds] = useState([]);
 
     const loadData = () => {
+        fetchNeeds().then(d => setNeeds(d.data));
         fetchAssignments().then(d => setAssigned(d.data));
       };
 
@@ -52,6 +54,7 @@ export default function VolunteerPage() {
         </div>
         <div className="map">
             <MapView
+                needs={needs}
                 assigned={assigned}
                 volunteers={volunteer}
             />
