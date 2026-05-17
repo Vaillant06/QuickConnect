@@ -19,7 +19,7 @@ export default function VolunteerPage() {
         const volunteerId = decoded.sub;
 
         fetchSingleVolunteer(volunteerId)
-            .then(data => setVolunteer(data))
+            .then(data => setVolunteer(data.data))
             .catch(err => console.error(err));
 
         console.log(volunteer);
@@ -35,9 +35,12 @@ export default function VolunteerPage() {
     <>  
         <div>
             <h1>Volunteer Page</h1>
-            <pre>
-    {JSON.stringify(volunteer, null, 2)}
-</pre>
+            {volunteer && (
+                <>
+                    <p>{volunteer.name}</p>
+                    <p>{volunteer.email}</p>
+                </>
+            )}
             <button onClick={logout}>Logout</button>
         </div>
         <div>
