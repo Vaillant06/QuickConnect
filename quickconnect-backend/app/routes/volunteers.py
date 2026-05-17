@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 import bcrypt
 
@@ -43,6 +43,17 @@ def get_volunteers(db: Session = Depends(get_db)):
     return {
         "data": volunteers
     }
+    
+    
+@router.get("/{id}")
+def get_single_volunteer(id: int, db: Session = Depends(get_db)):
+
+    volunteer = db.query(models.Volunteer).filter(models.Volunteer.id == id).first()
+
+    if not volunteer:
+        raise HTTPException(status_code=404, detail="Volunteer not found")
+
+    return {"data": volunteer}
 
 
 @router.get("/available")
