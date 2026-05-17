@@ -24,7 +24,7 @@ const Login = () => {
       if (!res.ok) throw new Error(data.detail);
 
       localStorage.setItem("token", data.access_token);
-      navigate("/");
+      navigate("/volunteers");
     } catch (err) {
       alert(err.message);
     }
