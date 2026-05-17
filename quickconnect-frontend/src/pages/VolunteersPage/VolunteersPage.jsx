@@ -22,6 +22,8 @@ export default function VolunteerPage() {
             .then(data => setVolunteer(data))
             .catch(err => console.error(err));
 
+        console.log(volunteer);
+
     }, []);
 
     const logout = () => {
@@ -33,6 +35,8 @@ export default function VolunteerPage() {
     <>  
         <div>
             <h1>Volunteer Page</h1>
+            <p>{volunteer.name}</p>
+            <p>{volunteer.email}</p>
             {volunteer && (
                 <>
                     <p>{volunteer.name}</p>
