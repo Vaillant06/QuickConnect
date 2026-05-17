@@ -22,6 +22,8 @@ export default function VolunteerPage() {
             .then(data => setVolunteer(data))
             .catch(err => console.error(err));
 
+        console.log(volunteer);
+
     }, []);
 
     const logout = () => {
