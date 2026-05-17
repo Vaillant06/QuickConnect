@@ -130,3 +130,12 @@ def delete_all_assignments(db: Session = Depends(get_db)):
     db.commit()
 
     return {"message": "All assignments cleared"}
+
+
+@router.get("/assignments/volunteer/{volunteer_id}")
+def get_assignments_by_volunteer(volunteer_id: int, db: Session = Depends(get_db)):
+    assignments = db.query(models.Assignment).filter(
+        models.Assignment.volunteer_id == volunteer_id
+    ).all()
+
+    return {"data": assignments}
