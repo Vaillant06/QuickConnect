@@ -35,6 +35,8 @@ export default function VolunteerPage() {
     <>  
         <div>
             <h1>Volunteer Page</h1>
+            <p>{volunteer.name}</p>
+            <p>{volunteer.email}</p>
             {volunteer && (
                 <>
                     <p>{volunteer.name}</p>
