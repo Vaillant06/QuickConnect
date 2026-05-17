@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 import { fetchSingleVolunteer } from "../../api";
 import MapView from "../../components/MapView/MapView";
