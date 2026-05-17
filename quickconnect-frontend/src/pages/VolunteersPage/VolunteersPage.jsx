@@ -35,14 +35,9 @@ export default function VolunteerPage() {
     <>  
         <div>
             <h1>Volunteer Page</h1>
-            <p>{volunteer.name}</p>
-            <p>{volunteer.email}</p>
-            {volunteer && (
-                <>
-                    <p>{volunteer.name}</p>
-                    <p>{volunteer.email}</p>
-                </>
-            )}
+            <pre>
+    {JSON.stringify(volunteer, null, 2)}
+</pre>
             <button onClick={logout}>Logout</button>
         </div>
         <div>
