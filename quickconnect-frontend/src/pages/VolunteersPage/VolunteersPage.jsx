@@ -23,11 +23,11 @@ export default function VolunteerPage() {
     }, [assigned]);
 
     useEffect(() => {
-        console.log("Assigned:", volunteer);
+        console.log("Volunteer:", volunteer);
     }, [volunteer]);
 
     useEffect(() => {
-        console.log("Assigned:", needs);
+        console.log("Needs:", needs);
     }, [needs]);
 
     useEffect(() => {
