@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-
+from datetime import datetime
 
 class NeedCreate(BaseModel):
     title: str
@@ -23,3 +23,18 @@ class VolunteerCreate(BaseModel):
 class VolunteerLogin(BaseModel):
     email: str
     password: str
+    
+class VolunteerAssignment(BaseModel):
+    id: int
+    volunteer_id: int
+    need_id: int
+    assigned_at: datetime
+    distance: float
+    status: str
+    score: int
+    latitude: float
+    longitude: float
+
+
+class VolunteerAssignmentsResponse(BaseModel):
+    data: list[VolunteerAssignment]

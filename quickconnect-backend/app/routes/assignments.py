@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app import models
+from app import models, schemas
 
 router = APIRouter()
 
@@ -132,7 +132,10 @@ def delete_all_assignments(db: Session = Depends(get_db)):
     return {"message": "All assignments cleared"}
 
 
-@router.get("/assignments/volunteer/{volunteer_id}")
+@router.get(
+    "/assignments/volunteer/{volunteer_id}",
+    response_model=schemas.VolunteerAssignmentsResponse)
+
 def get_assignments_by_volunteer(
     volunteer_id: int,
     db: Session = Depends(get_db)
@@ -150,10 +153,16 @@ def get_assignments_by_volunteer(
             models.Need.id == assignment.need_id
         ).first()
 
-        result.append({
-            "assignment": assignment,
-            "latitude": need.latitude if need else None,
-            "longitude": need.longitude if need else None
-        })
+        if need:
+            result.append({
+                "id": assignment.id,
+                "volunteer_id": assignment.volunteer_id,
+                "need_id": assignment.need_id,
+                "status": assignment.status,
+                "distance": round(assignment.distance, 2),
+                "score": assignment.score,
+                "latitude": need.latitude,
+                "longitude": need.longitude
+            })
 
     return {"data": result}
