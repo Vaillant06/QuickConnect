@@ -19,6 +19,18 @@ export default function VolunteerPage() {
     const [assigned, setAssigned] = useState([]);
 
     useEffect(() => {
+        console.log("Assigned:", assigned);
+    }, [assigned]);
+
+    useEffect(() => {
+        console.log("Assigned:", volunteer);
+    }, [volunteer]);
+
+    useEffect(() => {
+        console.log("Assigned:", needs);
+    }, [needs]);
+
+    useEffect(() => {
 
         const token = localStorage.getItem("token");
 
@@ -51,9 +63,6 @@ export default function VolunteerPage() {
 
             navigate("/login");
         }
-
-        console.log(assigned);
-        console.log(needs);
         
     }, [navigate]);
 
