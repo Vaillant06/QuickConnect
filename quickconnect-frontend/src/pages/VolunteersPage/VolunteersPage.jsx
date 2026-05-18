@@ -4,7 +4,8 @@ import { jwtDecode } from "jwt-decode";
 
 import {
     fetchSingleVolunteer,
-    fetchVolunteerAssignments
+    fetchVolunteerAssignments,
+    fetchNeeds
 } from "../../api";
 
 import MapView from "../../components/MapView/MapView";
@@ -13,6 +14,7 @@ export default function VolunteerPage() {
 
     const navigate = useNavigate();
 
+    const [needs, setNeeds] = useState([]);
     const [volunteer, setVolunteer] = useState(null);
     const [assigned, setAssigned] = useState([]);
 
@@ -38,6 +40,8 @@ export default function VolunteerPage() {
             fetchVolunteerAssignments(volunteerId)
                 .then(data => setAssigned(data.data))
                 .catch(err => console.error(err));
+            
+            fetchNeeds().then(d => setNeeds(d.data));
 
         } catch (err) {
 
@@ -49,6 +53,7 @@ export default function VolunteerPage() {
         }
 
         console.log(assigned);
+        console.log(needs);
         
     }, [navigate]);
 
@@ -99,6 +104,7 @@ export default function VolunteerPage() {
                 <MapView
                     assigned={assigned}
                     volunteers={volunteer ? [volunteer] : []}
+                    needs={needs}
                 />
             </div>
         </>
