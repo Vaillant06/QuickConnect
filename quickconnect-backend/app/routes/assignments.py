@@ -147,23 +147,23 @@ def get_assignments_by_volunteer(
 
     result = []
 
-    for assignment in assignments:
+    for a in assignments:
 
-        need = db.query(models.Need).filter(
-            models.Need.id == assignment.need_id
+        volunteer = db.query(models.Volunteer).filter(
+            models.Volunteer.id == a.volunteer_id
         ).first()
 
-        if need:
-            result.append({
-                "id": assignment.id,
-                "volunteer_id": assignment.volunteer_id,
-                "need_id": assignment.need_id,
-                "status": assignment.status,
-                "distance": round(assignment.distance, 2),
-                "assigned_at": assignment.assigned_at,
-                "score": assignment.score,
-                "latitude": need.latitude,
-                "longitude": need.longitude
-            })
+        result.append({
+            "id": a.id,
+            "need_id": a.need_id,
+            "volunteer_id": a.volunteer_id,
+            "status": a.status,
+            "name": volunteer.name if volunteer else None,
+            "latitude": volunteer.latitude if volunteer else None,
+            "longitude": volunteer.longitude if volunteer else None,
+            "score": a.score,
+            "distance_km": round(a.distance, 2) if a.distance else None
+        })
+
 
     return {"data": result}
