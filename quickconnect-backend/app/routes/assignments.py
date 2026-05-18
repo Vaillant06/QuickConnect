@@ -133,9 +133,27 @@ def delete_all_assignments(db: Session = Depends(get_db)):
 
 
 @router.get("/assignments/volunteer/{volunteer_id}")
-def get_assignments_by_volunteer(volunteer_id: int, db: Session = Depends(get_db)):
+def get_assignments_by_volunteer(
+    volunteer_id: int,
+    db: Session = Depends(get_db)
+):
+
     assignments = db.query(models.Assignment).filter(
         models.Assignment.volunteer_id == volunteer_id
     ).all()
 
-    return {"data": assignments}
+    result = []
+
+    for assignment in assignments:
+
+        need = db.query(models.Need).filter(
+            models.Need.id == assignment.need_id
+        ).first()
+
+        result.append({
+            "assignment": assignment,
+            "latitude": need.latitude if need else None,
+            "longitude": need.longitude if need else None
+        })
+
+    return {"data": result}
