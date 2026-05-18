@@ -160,6 +160,7 @@ def get_assignments_by_volunteer(
                 "need_id": assignment.need_id,
                 "status": assignment.status,
                 "distance": round(assignment.distance, 2),
+                "assigned_at": assignment.assigned_at,
                 "score": assignment.score,
                 "latitude": need.latitude,
                 "longitude": need.longitude
