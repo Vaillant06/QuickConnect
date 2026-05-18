@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 
 import {
     fetchSingleVolunteer,
-    fetchVolunteerAssignments,
+    fetchAssignments,
     fetchNeeds
 } from "../../api";
 
@@ -37,7 +37,7 @@ export default function VolunteerPage() {
                 .then(data => setVolunteer(data.data))
                 .catch(err => console.error(err));
 
-            fetchVolunteerAssignments(volunteerId)
+            fetchAssignments(volunteerId)
                 .then(data => setAssigned(data.data))
                 .catch(err => console.error(err));
             
@@ -104,7 +104,7 @@ export default function VolunteerPage() {
                 <MapView
                     assigned={assigned}
                     volunteers={volunteer ? [volunteer] : []}
-                    needs={needs}
+                    needs={needs}   
                 />
             </div>
         </>
