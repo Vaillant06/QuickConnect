@@ -162,6 +162,7 @@ def get_assignments_by_volunteer(
             "latitude": volunteer.latitude if volunteer else None,
             "longitude": volunteer.longitude if volunteer else None,
             "score": a.score,
+            "assigned_at": a.assigned_at,
             "distance_km": round(a.distance, 2) if a.distance else None
         })
 
