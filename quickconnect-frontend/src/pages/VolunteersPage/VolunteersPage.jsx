@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 
 import {
     fetchSingleVolunteer,
-    fetchAssignments,
+    fetchVolunteerAssignments,
     fetchNeeds
 } from "../../api";
 
@@ -37,7 +37,7 @@ export default function VolunteerPage() {
                 .then(data => setVolunteer(data.data))
                 .catch(err => console.error(err));
 
-            fetchAssignments(volunteerId)
+            fetchVolunteerAssignments(volunteerId)
                 .then(data => setAssigned(data.data))
                 .catch(err => console.error(err));
             
