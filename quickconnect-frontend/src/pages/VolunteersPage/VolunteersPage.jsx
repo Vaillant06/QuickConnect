@@ -48,6 +48,8 @@ export default function VolunteerPage() {
             navigate("/login");
         }
 
+        console.log(assigned);
+        
     }, [navigate]);
 
     const logout = () => {
@@ -62,13 +64,15 @@ export default function VolunteerPage() {
             <div>
                 <h1>Volunteer Page</h1>
 
-                {volunteer && (
+                {volunteer ? (
                     <div>
                         <p>Name: {volunteer.name}</p>
                         <p>Email: {volunteer.email}</p>
                         <p>Skills: {volunteer.skills}</p>
                         <p>Availability: {volunteer.availability}</p>
                     </div>
+                ) : (
+                    <p>Loading Details...</p>
                 )}
 
                 <button onClick={logout}>
