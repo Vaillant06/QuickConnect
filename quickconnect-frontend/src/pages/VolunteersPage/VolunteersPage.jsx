@@ -114,6 +114,7 @@ export default function VolunteerPage() {
                                     new Date(assignment.assigned_at).toLocaleString(
                                         "en-IN",
                                         {
+                                            timeZone: "Asia/Kolkata",
                                             day: "numeric",
                                             month: "short",
                                             year: "numeric",
