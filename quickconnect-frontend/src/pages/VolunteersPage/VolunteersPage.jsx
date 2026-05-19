@@ -66,7 +66,11 @@ export default function VolunteerPage() {
     useEffect(() => {
         console.log("Needs:", needs);
     }, [needs]);
-    
+
+    const statusUpdate = () => {
+        window.alert("Task Completed!");
+    };
+
     const logout = () => {
 
         localStorage.removeItem("token");
@@ -100,14 +104,22 @@ export default function VolunteerPage() {
 
                 {assigned.length > 0 ? (
                     assigned.map((assignment) => (
-                        <div key={assignment.id}>
+                        <div className="assignment" key={assignment.id}>
                             <p>Need ID: {assignment.need_id}</p>
                             <p>Status: {assignment.status}</p>
+                            <p>Latitude: {assignment.latitude}</p>
+                            <p>Longitude: {assignment.longitude}</p>
+                            <p>Assigned At: {assignment.assigned_at}</p>
+                            <p>Distance: {assignment.distance}</p>
                         </div>
                     ))
                 ) : (
                     <p>No assignments found</p>
                 )}
+            </div>
+
+            <div className="status">
+                <button onClick={statusUpdate}>Task Completed</button>
             </div>
 
             <div className="map">
