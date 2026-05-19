@@ -109,7 +109,20 @@ export default function VolunteerPage() {
                             <p>Status: {assignment.status}</p>
                             <p>Latitude: {assignment.latitude}</p>
                             <p>Longitude: {assignment.longitude}</p>
-                            <p>Assigned At: {assignment.assigned_at}</p>
+                            <p>
+                                Assigned At: {
+                                    new Date(assignment.assigned_at).toLocaleString(
+                                        "en-IN",
+                                        {
+                                            day: "numeric",
+                                            month: "short",
+                                            year: "numeric",
+                                            hour: "numeric",
+                                            minute: "2-digit"
+                                        }
+                                    )
+                                }
+                            </p>
                             <p>Distance: {assignment.distance}</p>
                         </div>
                     ))
