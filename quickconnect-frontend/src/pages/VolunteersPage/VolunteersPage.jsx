@@ -136,8 +136,8 @@ export default function VolunteerPage() {
             </div>
 
             <div className="status">
-                {startTask && <button onClick={startTask}>Start Task</button>}
-                {endTask && <button onClick={endTask}>Task Completed</button>}
+                {isStartTask && <button onClick={startTask}>Start Task</button>}
+                {isEndTask && <button onClick={endTask}>Task Completed</button>}
             </div>
 
             <div className="map">
