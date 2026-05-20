@@ -27,47 +27,45 @@ export default function VolunteerPage() {
             return;
         }
 
-        try {
+        const loadData = async () => {
 
-            const decoded = jwtDecode(token);
+            try {
 
-            const volunteerId = Number(decoded.sub);
+                const decoded = jwtDecode(token);
+                const volunteerId = Number(decoded.sub);
 
-            fetchSingleVolunteer(volunteerId)
-                .then(data => setVolunteer(data.data))
-                .catch(err => console.error(err));
+                const volunteerData = await fetchSingleVolunteer(volunteerId);
+                setVolunteer(volunteerData.data);
 
-            fetchVolunteerAssignments(volunteerId)
-                .then(data => setAssigned(data.data))
-                .catch(err => console.error(err));
-            
-            fetchNeeds().then(d => setNeeds(d.data));
+                const assignmentData = await fetchVolunteerAssignments(volunteerId);
+                setAssigned(assignmentData.data);
 
-        } catch (err) {
+                const needsData = await fetchNeeds();
+                setNeeds(needsData.data);
 
-            console.error("Invalid token", err);
+            } catch (err) {
 
-            localStorage.removeItem("token");
+                console.error(err);
+                localStorage.removeItem("token");
+                navigate("/login");
+            }
+        };
 
-            navigate("/login");
-        }
+        loadData();
+
+        const interval = setInterval(() => {
+            loadData();
+        }, 10000);
         
+        return () => clearInterval(interval);
+
     }, [navigate]);
 
+    const startTask = () => {
+        window.alert("Task Started!");
+    }
 
-    useEffect(() => {
-        console.log("Assigned:", assigned);
-    }, [assigned]);
-
-    useEffect(() => {
-        console.log("Volunteer:", volunteer);
-    }, [volunteer]);
-
-    useEffect(() => {
-        console.log("Needs:", needs);
-    }, [needs]);
-
-    const statusUpdate = () => {
+    const endTask = () => {
         window.alert("Task Completed!");
     };
 
@@ -124,7 +122,7 @@ export default function VolunteerPage() {
                                     )
                                 }
                             </p>
-                            <p>Distance: {assignment.distance}</p>
+                            <p>Distance: {assignment.distance} km</p>
                         </div>
                     ))
                 ) : (
@@ -133,7 +131,8 @@ export default function VolunteerPage() {
             </div>
 
             <div className="status">
-                <button onClick={statusUpdate}>Task Completed</button>
+                <button onClick={startTask}>Start Task</button>
+                <button onClick={endTask}>Task Completed</button>
             </div>
 
             <div className="map">
