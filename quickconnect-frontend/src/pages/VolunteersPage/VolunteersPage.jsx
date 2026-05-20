@@ -17,6 +17,8 @@ export default function VolunteerPage() {
     const [needs, setNeeds] = useState([]);
     const [volunteer, setVolunteer] = useState(null);
     const [assigned, setAssigned] = useState([]);
+    const [isStartTask, setStartTask] = useState(null);
+    const [isEndTask, setEndTask] = useState(null);
 
     useEffect(() => {
 
@@ -42,6 +44,9 @@ export default function VolunteerPage() {
 
                 const needsData = await fetchNeeds();
                 setNeeds(needsData.data);
+
+                setStartTask(true);
+                setEndTask(true);
 
             } catch (err) {
 
@@ -131,8 +136,8 @@ export default function VolunteerPage() {
             </div>
 
             <div className="status">
-                <button onClick={startTask}>Start Task</button>
-                <button onClick={endTask}>Task Completed</button>
+                {startTask && <button onClick={startTask}>Start Task</button>}
+                {endTask && <button onClick={endTask}>Task Completed</button>}
             </div>
 
             <div className="map">
