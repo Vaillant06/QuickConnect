@@ -17,8 +17,8 @@ export default function VolunteerPage() {
     const [needs, setNeeds] = useState([]);
     const [volunteer, setVolunteer] = useState(null);
     const [assigned, setAssigned] = useState([]);
-    const [startTask, setStartTask] = useState(null);
-    const [endTask, setEndTask] = useState(null);
+    const [isStartTask, setStartTask] = useState(null);
+    const [isEndTask, setEndTask] = useState(null);
 
     useEffect(() => {
 
