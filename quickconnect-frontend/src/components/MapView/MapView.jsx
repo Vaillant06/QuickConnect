@@ -125,7 +125,7 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
             icon={starIcon}
           >
             <Popup>
-              ⭐ <b>Name: {a.name}</b> <br />
+              ⭐ <b>Name: {a.volunteer_name}</b> <br />
               <b>Status:</b> {a.status}<br />
               <b>Score:</b> {a.score} <br />
               <b>Distance:</b> {a.distance} km
