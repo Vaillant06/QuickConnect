@@ -80,16 +80,13 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
                 <b >Urgency:</b> {need.urgency}<br />
                 <b>Category:</b> {need.category}<br />
                 <b>Description:</b> {need.description}
-                <pre>{JSON.stringify(assigned, null, 2)}</pre>
-                {assigned && (
+                {acceptedAssignments && (
                   <div>
                     <b>Assigned Volunteer:</b>
-                    {assigned
+                    {acceptedAssignments
                       .filter((a) => a.need_id === need.id)
                       .map((a) => (
-                        <div key={a.volunteer_id}>
-                          <b>{a.name}</b> - {a.distance} km
-                        </div>
+                          <span key={a.volunteer_id}><b> {a.volunteer_name}</b> - {a.distance} km</span>
                       ))}
                   </div>
                   )
