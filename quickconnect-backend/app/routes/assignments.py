@@ -156,8 +156,8 @@ def get_assignments_by_volunteer(
         result.append({
             "id": a.id,
             "need_id": a.need_id,
-            "volunteer_id": a.volunteer_id,
-            "volunteer_name": a.volunteer_name,
+            "volunteer_id": a.volunteer_id if volunteer else None,
+            "volunteer_name": volunteer.name if volunteer else None,
             "status": a.status,
             "latitude": volunteer.latitude if volunteer else None,
             "longitude": volunteer.longitude if volunteer else None,
