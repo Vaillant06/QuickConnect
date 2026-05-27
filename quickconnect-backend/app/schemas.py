@@ -27,6 +27,7 @@ class VolunteerLogin(BaseModel):
 class VolunteerAssignment(BaseModel):
     id: int
     volunteer_id: int
+    volunteer_name: str
     need_id: int
     assigned_at: datetime
     distance: float

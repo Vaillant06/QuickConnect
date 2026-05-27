@@ -159,7 +159,6 @@ def get_assignments_by_volunteer(
             "volunteer_id": a.volunteer_id,
             "volunteer_name": a.volunteer_name,
             "status": a.status,
-            "name": volunteer.name if volunteer else None,
             "latitude": volunteer.latitude if volunteer else None,
             "longitude": volunteer.longitude if volunteer else None,
             "score": a.score,
