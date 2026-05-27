@@ -45,8 +45,10 @@ export default function VolunteerPage() {
                 const needsData = await fetchNeeds();
                 setNeeds(needsData.data);
 
-                setStartTask(true);
-                setEndTask(true);
+                if (assignmentData.data.length > 0) {
+                    setStartTask(true);
+                    setEndTask(true);
+                }
 
             } catch (err) {
 
