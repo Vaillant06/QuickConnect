@@ -6,13 +6,15 @@ from app import models, schemas
 
 router = APIRouter()
 
-
 @router.get("/assignments")
 def get_assignments(db: Session = Depends(get_db)):
 
     assignments = db.query(models.Assignment).all()
-    assignments = sorted(assignments, key=lambda x: x.score, reverse=True)
-
+    assignments = sorted(
+        assignments,
+        key=lambda x: (-x.score, x.distance)
+    )
+    
     result = []
 
     for a in assignments:

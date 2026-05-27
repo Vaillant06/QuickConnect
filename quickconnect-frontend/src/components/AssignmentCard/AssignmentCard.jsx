@@ -6,7 +6,7 @@ const AssignmentCard = ({ a, refresh }) => {
     <div className="assign-card">
 
       <div className="assign-header">
-        <span className="assign-name">{a.name}</span>
+        <span className="assign-name">{a.volunteer_name}</span>
 
         <span className={`assign-status ${a.status}`}>
           {a.status}
@@ -15,7 +15,7 @@ const AssignmentCard = ({ a, refresh }) => {
 
       <div className="assign-info">
         <span>⭐ {a.score}</span>
-        <span>📍 {a.distance_km} km</span>
+        <span>📍 {a.distance} km</span>
       </div>
 
       {a.status === "pending" && (
