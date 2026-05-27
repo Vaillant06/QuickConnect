@@ -45,8 +45,10 @@ export default function VolunteerPage() {
                 const needsData = await fetchNeeds();
                 setNeeds(needsData.data);
 
-                setStartTask(true);
-                setEndTask(true);
+                if (assignmentData.data.length > 0) {
+                    setStartTask(true);
+                    setEndTask(true);
+                }
 
             } catch (err) {
 
@@ -136,8 +138,8 @@ export default function VolunteerPage() {
             </div>
 
             <div className="status">
-                {startTask && <button onClick={startTask}>Start Task</button>}
-                {endTask && <button onClick={endTask}>Task Completed</button>}
+                {isStartTask && <button onClick={startTask}>Start Task</button>}
+                {isEndTask && <button onClick={endTask}>Task Completed</button>}
             </div>
 
             <div className="map">
