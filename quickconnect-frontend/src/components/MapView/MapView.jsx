@@ -56,7 +56,7 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
       ? [validNeeds[0].latitude, validNeeds[0].longitude]
       : [13.0827, 80.2707];
 
-
+  console.log(assigned);
   return (
     <div className="map-container" style={{ position: "relative" }}>
       <MapContainer
@@ -80,6 +80,22 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
                 <b >Urgency:</b> {need.urgency}<br />
                 <b>Category:</b> {need.category}<br />
                 <b>Description:</b> {need.description}
+                <pre>{JSON.stringify(assigned, null, 2)}</pre>
+                {assigned && (
+                  <div>
+                    <b>Assigned Volunteer:</b>
+                    {assigned
+                      .filter((a) => a.need_id === need.id)
+                      .map((a) => (
+                        <div key={a.volunteer_id}>
+                          <b>{a.name}</b> - {a.distance} km
+                        </div>
+                      ))}
+                  </div>
+                  )
+                }
+
+                
               </Popup>
             </Marker>
           ))}
@@ -109,10 +125,10 @@ const MapView = ({ needs = [], volunteers = [], assigned = [] }) => {
             icon={starIcon}
           >
             <Popup>
-              ⭐ <b>{a.name}</b> <br />
+              ⭐ <b>Name: {a.name}</b> <br />
               <b>Status:</b> {a.status}<br />
               <b>Score:</b> {a.score} <br />
-              <b>Distance:</b> {a.distance_km} km
+              <b>Distance:</b> {a.distance} km
             </Popup>
           </Marker>
         ))}

@@ -25,11 +25,11 @@ def get_assignments(db: Session = Depends(get_db)):
             "need_id": a.need_id,
             "volunteer_id": a.volunteer_id,
             "status": a.status,
-            "name": volunteer.name if volunteer else None,
+            "name": volunteer.name,
             "latitude": volunteer.latitude if volunteer else None,
             "longitude": volunteer.longitude if volunteer else None,
             "score": a.score,
-            "distance_km": round(a.distance, 2) if a.distance else None
+            "distance": round(a.distance, 2) if a.distance else None
         })
 
     return {"data": result}

@@ -116,7 +116,7 @@ export default function VolunteerPage() {
                             <p>Longitude: {assignment.longitude}</p>
                             <p>
                                 Assigned At: {
-                                    new Date(assignment.assigned_at).toLocaleString(
+                                    new Date(assignment.assigned_at + "Z").toLocaleString(
                                         "en-IN",
                                         {
                                             timeZone: "Asia/Kolkata",
