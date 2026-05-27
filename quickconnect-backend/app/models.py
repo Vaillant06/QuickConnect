@@ -39,6 +39,7 @@ class Assignment(Base):
     id = Column(Integer, primary_key=True, index=True)
     need_id = Column(Integer, ForeignKey("needs.id"))
     volunteer_id = Column(Integer, ForeignKey("volunteers.id"))
+    volunteer_name = Column(String, nullable=True)
     status = Column(String, default="pending")
     assigned_at = Column(TIMESTAMP, server_default=func.now())
     score = Column(Integer, nullable=True)
